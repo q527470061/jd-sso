@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+
+		<title>注册</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/vue.js"></script>
+		<style>
+			a {
+				text-decoratikon: none;
+			}
+			
+			#mark {
+				color: rgb(211, 211, 211);
+			}
+			
+			#inf {
+				text-align: right;
+				padding-right: 50px;
+			}
+			
+			#myCode {
+				font-family: Arial;
+				font-style: italic;
+				font-weight: bold;
+				font-size: 20px;
+				border: 0;
+				letter-spacing: 2px;
+				color: rgb(148, 0, 211);
+				width: 80px;
+				height: 40px;
+				margin-left: 0px;
+				margin-top: 10px;
+			}
+			
+			.msg {
+				color: rgb(220, 220, 220);
+				font-size: 12px;
+			}
+			
+			.circle {
+				width: 25px;
+				height: 25px;
+				border-radius: 50%;
+				-moz-border-radius: 50%;
+				-webkit-borer-radius: 50%;
+				text-align: center;
+			}
+			
+			.cicleback {
+				margin: 0 auto;
+				display: block;
+				width: 24px;
+				height: 24px;
+				line-height: 24px;
+				background-position: -45px -200px;
+				font-size: 12px;
+				font-weight: 700;
+			}
+			
+			.step-back1 {
+				background-color: white;
+				border: 2px solid #DCDCDC;
+				color: #ccc;
+			}
+			
+			.step-back2 {
+				background-color: #3b4;
+				border: 2px solid #3b4;
+				color: #fff;
+			}
+			
+			.steyun {
+				text-align: center;
+				width: 60px;
+				height: 54.8px;
+				float: left;
+				margin-left: 20px;
+				margin-right: 120px;
+			}
+			
+			.step-desc {
+				margin-top: 10px;
+				font-size: 12px;
+				color: #999;
+			}
+			
+			.step-changecolor {
+				color: #3b4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="row" style="height: 90px;box-shadow:2px 2px 15px #DCDCDC;">
+			<div class="col-md-1"></div>
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-2">
+						<a href="main.html"><img src="/img/jdlogo2.png" style="margin-top: 20px;" /></a>
+					</div>
+					<div class="col-md-10 text-left">
+						<h3 style="margin-top: 35px;margin-left: -40px;">欢迎注册</h3>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2" id="inf">
+				<label id="mark">已有账号？</label>
+				<a href="/page/login" style="color: red;">请登录 ></a>
+			</div>
+		</div>
+		<div class="container" id="main">
+			<div class="row" style="margin-top: 20px;">
+				<div class="col-md-3"></div>
+
+				<div class="col-md-8" style="padding-top: 40px;">
+					<div class="steyun">
+						<div class="circle cicleback step-back2">1</div>
+						<p class="step-desc step-changecolor">填写信息</p>
+					</div>
+					<div class="steyun">
+						<div class="circle cicleback step-back1">2</div>
+						<p class="step-desc">验证邮箱</p>
+					</div>
+					<div class="steyun">
+						<div class="circle cicleback step-back1">3</div>
+						<p class="step-desc">注册成功</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"></div>
+
+				<div class="col-md-5" style="padding-top: 40px;">
+					<!--
+                    	用户名
+                    -->
+					<form class="form-horizontal" role="form" method="post" @submit.prevent="submit">
+						<div class="form-group">
+							<label for="username" class="col-sm-2 control-label glyphicon glyphicon-user"></label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" v-model="username" name="username" placeholder="请输入用户名" @blur="checkName" @focus="showInitName">
+								<span class="msg" v-html="nameMsg"></span>
+							</div>
+						</div>
+						<!-- 密码-->
+						<div class="form-group">
+							<label for="password" class="col-sm-2 control-label"><span
+							class="glyphicon glyphicon-lock"></span></label>
+							<div class="col-sm-10">
+								<input type="password" class="form-control" v-model="pass" name="password" placeholder="请输入密码" @blur="checkPass1" @focus="showInitPass1">
+								<span class="msg" v-html="passMsg"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="pass2" class="col-sm-2 control-label"><span
+							class="glyphicon glyphicon-lock"></span></label>
+							<div class="col-sm-10">
+								<input type="password" class="form-control" v-model="pass2" placeholder="请确认密码" @blur="checkSecPass">
+								<span class="msg" v-html="pass2Msg"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="mail" class="col-sm-2 control-label"> <span
+							class="glyphicon glyphicon-envelope"></span></label>
+							<div class="col-sm-10">
+								<input type="email" class="form-control" v-model="mail" name="email" placeholder="请输入邮箱" @blur="checkMail" @focus="showInitMail">
+								<span class="msg" v-html="mailMsg"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="phone" class="col-sm-2 control-label"> <span
+							class="glyphicon glyphicon-earphone"></span></label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" v-model="phone" name="phone" placeholder="请输入手机号" @blur="checkPhone" @focus="showInitPhone">
+								<span class="msg" v-html="phoneMsg"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="yanCode" class="col-sm-2 control-label"> 验证码</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" v-model="yanCode" @blur="checkCode" placeholder="请输入验证码">
+								<input type="button" id="myCode" v-model="code" @click="createCode" /><span class="msg" v-html="codeMsg"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<input type="submit" class="btn btn-default" value="注册" style="margin-right: 30px;"/> <input type="reset" class="btn btn-default" value="重置" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script>
+		//单点登录系统的url
+		const SSO_SERVER_BASE = "/sso/user/";
+
+		var ok1 = false;
+		var ok2 = false;
+		var ok3 = false;
+		var ok4 = false;
+		var ok5 = false;
+		var ok6 = false;
+
+		var main = new Vue({
+			el: '#main',
+			data: {
+				username: '',
+				nameMsg: '',
+				pass: '',
+				passMsg: '',
+				pass2: '',
+				pass2Msg: '',
+				mail: '',
+				mailMsg: '',
+				phone: '',
+				phoneMsg: '',
+				yanCode: '',
+				codeMsg: '',
+				code: ''
+			},
+			created: function() {
+				var nowcode = '';
+				var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C',
+					'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+					'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+				for(var i = 0; i < 4; i++) {
+					//设置下标0-36
+					var index = Math.floor(Math.random() * 36);
+					nowcode += random[index];
+				}
+				this.code = nowcode;
+			},
+			methods: {
+				checkName() {
+					debugger;
+					this.nameMsg = '';
+					var tusername = this.username;
+					if(tusername.length == 0 || tusername == '') {
+						this.nameMsg = "<span class='glyphicon glyphicon-exclamation-sign' style='color:red'>用户名为空</span>";
+					} else if(tusername.length < 4 && tusername.length > 20) {
+						this.nameMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>用户名在4到20位之间</span>";
+					} else {
+						fetch(SSO_SERVER_BASE + 'check/' + tusername + '/1', {
+								method: 'GET',
+								headers: {
+									"Content-Type": "application/x-www-form-urlencoded"
+								}
+							})
+							.then(function(response) {
+								return response.json();
+							}).then(function(data) {
+								if(data.data) {
+									ok1 = true;
+								} else {
+									main.nameMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>该用户名已注册</span>";
+								}
+								debugger;
+							}).catch(function(e) {
+								console.log("Oops, error");
+								debugger;
+							});
+					}
+				},
+				showInitName() {
+					this.nameMsg = '您的用户名可以由小写英文字母、中文、数字组成，长度4－20个字符，一个汉字为两个字符。'
+				},
+				checkPass1() {
+					this.passMsg = '';
+					var tpass = this.pass;
+					if(tpass.length >= 6 && tpass.length <= 20 &&
+						this.pass != '') {
+						ok2 = true;
+					} else {
+						this.passMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>密码应该为6-20位之间</span>";
+					}
+				},
+				showInitPass1() {
+					this.passMsg = '您的密码可以由大小写英文字母、数字组成，长度6－20位';
+				},
+				checkSecPass() {
+					this.pass2Msg = '';
+
+					if(this.pass2 == this.pass) {
+						ok3 = true;
+						debugger;
+					} else {
+						this.pass2Msg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>两次密码输入不一致</span>";
+						debugger;
+					}
+				},
+				checkMail() {
+					this.mailMsg = '';
+					if(this.mail.search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/) == -1) {
+						this.mailMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>请输入正确的EMAIL格式</span>";
+					} else {
+						fetch(SSO_SERVER_BASE + 'check/' + this.mail + '/3', {
+								method: 'GET',
+								headers: {
+									"Content-Type": "application/x-www-form-urlencoded"
+								}
+							})
+							.then(function(response) {
+								return response.json();
+							}).then(function(data) {
+								if(data.data) {
+									ok4 = true;
+								} else {
+									main.mailMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>该邮箱已注册</span>";
+								}
+							}).catch(function(e) {
+								console.log("Oops, error");
+							});
+					}
+
+				},
+				showInitMail() {
+					this.mailMsg = '请填写有效的Email地址，在下一步中您将用此邮箱接收验证邮件。';
+
+				},
+				checkPhone() {
+					this.phoneMsg = '';
+					var c = this.phone.match(/^1[0-9]{10}$/);
+					if(this.phone.length == 0) {
+						this.phoneMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>手机号为空</span>";
+					} else if(c == null) {
+						this.phoneMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>手机号码格式错误</span>";
+					} else {
+						fetch(SSO_SERVER_BASE + 'check/' + this.phone + '/2', {
+								method: 'GET',
+								headers: {
+									"Content-Type": "application/x-www-form-urlencoded"
+								}
+							})
+							.then(function(response) {
+								return response.json();
+							}).then(function(data) {
+								if(data.data) {
+									ok5 = true;
+								} else {
+									main.phoneMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>该手机号已注册</span>";
+								}
+							}).catch(function(e) {
+								console.log("Oops, error");
+							});
+					}
+				},
+				showInitPhone() {
+					this.phoneMsg = '验证完成后，您可以使用此手机号找回密码';
+				},
+				checkCode() {
+					if(this.yanCode.length == 0) {
+						this.codeMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>验证码为空</span>";
+					} else if(this.yanCode != this.code) {
+						this.codeMsg = "<span class='glyphicon glyphicon-exclamation-sign'  style='color:red'>验证码输入错误</span>";
+						this.createCode();
+					} else {
+						ok6=true;
+						this.codeMsg = "";
+					}
+				},
+				createCode() {
+					var nowcode = '';
+					var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C',
+						'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+						'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+					for(var i = 0; i < 4; i++) {
+						//设置下标0-36
+						var index = Math.floor(Math.random() * 36);
+						nowcode += random[index];
+					}
+					this.code = nowcode;
+				},
+				submit() {
+					if(ok1 && ok2 && ok3 && ok4 && ok5 && ok6) {
+						debugger;
+						
+						let formData = new FormData();
+					    formData.append("username",this.username);
+					    formData.append("password",this.pass);
+					    formData.append("phone",this.phone);
+					    formData.append("email",this.mail);
+
+					    var opts = {
+					        method:"POST",   //请求方法
+					        body:formData,   //请求体
+						　　　heads:{
+							　 	'Accept': 'application/json',
+						   　　　　    'Content-Type': 'application/json',
+						　　　}
+
+					    }
+						
+						fetch(SSO_SERVER_BASE + '/registe',opts )
+						.then(function(response) {
+							return response.json();
+						}).then(function(data) {
+							if(data.status==200){
+								alert("注册成功");
+								window.location="/login.html";
+							}else{
+								alert("注册失败")
+							}
+						}).catch(function(e) {
+							console.log("Oops, error");
+						});
+					} else {
+						alert("提交有误");
+						debugger;
+						return false;
+					}
+				}
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>登录</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/component.css" />
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/vue.js"></script>
+<script src="/js/vue_componet.js"></script>
+<style>
+#mark {
+	color: rgb(211, 211, 211);
+}
+
+#inf {
+	text-align: right;
+	padding-right: 50px;
+}
+
+#main {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+</style>
+</head>
+
+<body>
+	<div id="main">
+		<div class="alert alert-warning" v-if="msgshow" )>
+			<a href="#" class="close" data-dismiss="alert"> &times; </a> <strong>警告！</strong>{{topmsg}}
+		</div>
+
+		<div class="row" style="height: 80px;">
+			<div class="col-md-2">
+				<strong style="font-size: 25px; color: red"></strong>
+			</div>
+			<div class="col-md-7">
+				<div class="col-md-2 text-left">
+					<a href="复制 main.html"><img src="/img/jdlogo2.png"
+						style="margin-top: 20px;" /></a>
+				</div>
+				<div class="col-md-10 text-left">
+					<h3 style="margin-top: 35px;">欢迎登录</h3>
+				</div>
+			</div>
+			<div class="col-md-3" id="inf">
+				<label id="mark">没有账号？</label> <a href="/page/registe"
+					style="color: red;">请注册</a>
+			</div>
+		</div>
+		<div class="row"
+			style="background-color: #fff8f0;; height: 40px; margin: auto;">
+			<div class="col-md-3"></div>
+			<div class="col-md-7"
+				style="font-size: 12px; color: rgb(119, 136, 153); padding: 12px;">依据《网络安全法》，为保障您的账户安全和正常使用，请尽快完成手机号验证！
+				新版《京东隐私政策》已上线，将更有利于保护您的个人隐私。</div>
+			<div class="col-md-2"></div>
+		</div>
+		<div class="row"
+			style="background: url(/img/login_bg.png); width: 100%; height: 450px;">
+			<div class="col-md-8"></div>
+			<div class="col-md-4" style="padding-top: 40px;">
+				<form class="form-horizontal" role="form" action="javascript:;"
+					method="post">
+					<div class="form-group">
+						<label for="userName"
+							class="col-sm-2 control-label glyphicon glyphicon-user"></label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" v-model="username"
+								placeholder="请输入用户名">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label"><span
+							class="glyphicon glyphicon-lock"></span></label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" v-model="passWord"
+								placeholder="请输入密码">
+						</div>
+					</div>
+
+					<div class="form-group" id="vcode">
+						<label for="verifycode" class="col-sm-2 control-label"><img
+							class="yzm_img" id='imgVcode' :src="imgsrc"
+							style="margin-left: 0px; margin-top: -8px" /></label>
+						<div class="col-sm-3">
+							<input type="verifycode" class="form-control"
+								v-model="verifycode" name="verifycode" placeholder="请输入验证码"
+								@blur="checkVerifycode">
+						</div>
+						<div class="col-sm-3">
+							<a href="#" id="changeVcode" @click="changeVcode">看不清楚？换个图片</a>
+						</div>
+						<div class="col-sm-4">
+							<span style="color: white">{{msg}}</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input type="submit" class="btn btn-default" id="submit"
+								value="登录" @click="checkSubmit">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="foot">
+		<jd-footer></jd-footer>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+		//单点登录系统的url
+		const SSO_SERVER_BASE = '/sso/user/';
+	
+		new Vue({
+			el: '#foot'
+		})
+
+		var ok1 = false;
+		var main=new Vue({
+			el: '#main',
+			data: {
+				msg: ' ',
+				imgsrc: '',
+				username: '',
+				verifycode: '',
+				passWord: '',
+				key:'',
+				msgshow:false,
+				topmsg:'',
+			},
+			created:function(){
+				this.key=new Date().getTime()+this.randPassword();
+				this.imgsrc = "/sso/user/geneVerifyCode/" +this.key ;
+			},
+			// 在 `methods` 对象中定义方法
+			methods: {
+				//生成随机密文
+				randPassword() { 
+					var text=['abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ','1234567890','~!@#$^&*()_+";",.<>']; 
+					var rand = function(min, max){return Math.floor(Math.max(min, Math.random() * (max+1)));} 
+					var len = rand(8, 16); // 长度为8-16 
+					var pw = ''; 
+					for(i=0; i<len; ++i) { 
+						var strpos = rand(0, 3); 
+						pw += text[strpos].charAt(rand(0, text[strpos].length)); 
+					} 
+					return pw; 
+				} ,
+				//切换验证码
+				changeVcode() {
+					this.imgsrc = "/sso/user/geneVerifyCode/" +this.key+"?a="+new Date().getTime() ;
+				},
+				//校验验证码
+				checkVerifycode() {
+					if(this.verifycode.length == 0) {
+						main.msg="验证码为空";
+						debugger;
+					}else{
+						fetch('/sso/user/checkVerifyCode/'+this.key+"/"+this.verifycode, {
+							method: 'GET',
+							headers: {
+								"Content-Type": "application/x-www-form-urlencoded"
+							}
+						})
+						.then(function(response) {
+							return response.json();
+						}).then(function(data) {
+							if(data.status==200){
+								main.msg="";
+								ok1 = true;
+							}else{
+								main.msg=data.msg;
+							}
+							debugger;
+						}).catch(function(e) {
+							console.log("Oops, error");
+							debugger;
+						});
+					}
+					
+				},
+				checkSubmit() {
+					if(ok1) {
+						debugger;
+						let formData = new FormData();
+					    formData.append("username",this.username);
+					    formData.append("password",this.passWord);
+
+					    var opts = {
+					        method:"POST",   //请求方法
+					        body:formData,   //请求体
+						　　　heads:{
+							　 	'Accept': 'application/json',
+						   　　　　    'Content-Type': 'application/json',
+						　　　}
+
+					    }						
+						fetch(SSO_SERVER_BASE+'/login',opts )
+						.then(function(response) {
+							return response.json();
+						}).then(function(data) {
+							if(data.status==200){
+								alert("登陆成功");
+								window.location="http://localhost:8084";
+							}else{
+								this.msgshow=true; 
+								this.topmsg=data.msg; 
+								debugger;
+							}
+						}).catch(function(e) {
+							main.msgshow=true;
+							main.topmsg='提交出现异常';
+							debugger;
+						});
+					} else {
+						this.checkVerifycode();
+						return false;
+					}
+				}
+			}
+		})
+	</script>
+
+</html>

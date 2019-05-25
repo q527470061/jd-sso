@@ -1,0 +1,42 @@
+.footer ul li a {
+	font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+	color: #666;
+}
+
+.footer ul {
+	padding-left: 50px;
+}
+
+.foot_but {
+	margin: 10px 0;
+	font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+	color: #666;
+}
+
+.head_search {
+	padding-top: 5px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 50px;
+	border-bottom: solid 2px red;
+	background: white;
+}
+
+.head_search img{
+	height: 33px;
+}
+
+.head_search>div>div input {
+	margin-top: 3px;
+	background: #F5F5F5;
+}
+                       
+.soubutton a:link,.soubutton a:hover,.soubutton a:active,.soubutton a:visited{
+	border: 0px ;
+	height: 40px;
+	background-color: red;
+	font-size: 18px;
+	color: white;
+}
+

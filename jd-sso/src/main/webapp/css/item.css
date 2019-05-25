@@ -1,0 +1,179 @@
+.body {
+	width: 80%;
+}
+
+.itemaside {
+	padding-right: 1px;
+}
+
+.itemaside>div {
+	margin-top: 10px;
+}
+
+.item_pic1 {
+	width: 100%;
+}
+
+.jiantou {
+	font-size: 50px;
+	font-weight: 150px;
+	color: #DCDCDC;
+}
+
+.minicon {
+	margin-top: 10px;
+	margin-left: -20px;
+}
+
+.minicon img {
+	width: 42px;
+}
+
+.item_main {
+	margin-left: 55px;
+	padding-top: 20px;
+	padding-right: 90px;
+}
+
+.item_title {
+	font: 700 16px Arial, "microsoft yahei";
+	color: #666;
+	padding-top: 10px;
+	line-height: 28px;
+	margin-bottom: 5px;
+}
+
+.item_point {
+	margin-top: 5px;
+}
+
+.item_point span {
+	font-size: 12px;
+	color: red;
+}
+
+.item_point span a {}
+
+.item_price {
+	margin-top: 5px;
+	padding: 10px 0 0;
+	background: #f3f3f3;
+	height: 86.6px;
+}
+
+.dt {
+	float: left;
+	padding-left: 25px;
+	font-family: simsun;
+	color: #999;
+	font-size: 13px;
+}
+
+.item_price_zhen {
+	padding-left: 10px;
+	margin-top: -5px;
+	float: left;
+	font-size: 20px;
+	color: #FF4500;
+}
+
+.dj {
+	color: #808080;
+	font-size: 12px;
+}
+
+.item_price_you {
+	color: red;
+	font-size: 12px;
+	padding: 4px;
+	border: 1px solid red;
+	margin-left: 15px;
+}
+
+.text {
+	float: left;
+	margin-left: 5px;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+	line-height: 23px;
+	font: 12px/150% tahoma, arial, Microsoft YaHei, Hiragino Sans GB, "\u5b8b\u4f53", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	color: #666;
+}
+
+.tupian_item {
+	width: 60px;
+}
+
+.inputnum {
+	margin-left: -20px;
+	border: 1px solid #C0C0C0;
+	width: 60px;
+	height: 30px;
+}
+
+.font1 {
+	font-size: 15px;
+	font-weight: bold;
+	color: #808080;
+}
+
+.money1 {
+	color: red;
+	font-size: 12px;
+}
+
+.dian {
+	height: 40px;
+	background: #F5F5F5;
+	border-bottom: solid 1px red;
+	margin-top: 20px;
+}
+
+.diancontent {}
+
+.diancontent>div {
+	padding: 20px;
+	float: left;
+}
+
+.diancontent>div span {
+	text-align: center;
+	margin-top: 10px;
+	color: red;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.item_content ul li a {
+	font-size: 15px;
+	color: grey;
+}
+
+img :hover {
+	opacity: 0.7
+}
+
+.bigtable {
+	margin-top: 30px;
+}
+
+.big_param {
+	font-weight: 400;
+	font-size: 12px;
+	float: left;
+	line-height: 220%;
+	color: #999;
+}
+
+.tparam {
+	width: 160px;
+	float: left;
+	text-align: right;
+	padding-right: 5px;
+	line-height: 220%;
+	color: #999;
+	font-size: 12px;
+}
+
